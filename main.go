@@ -18,14 +18,8 @@ func main() {
 	var loop int = 1
 	for i := 0; i < loop; i++ {
 		input := MenuUtama()
-		if len(input) > 0 {
-			in, err := strconv.Atoi(input)
-			if err != nil {
-				fmt.Println("Input Harus Angka !")
-				loop++
-				continue
-			}
-			switch in {
+		if len(strconv.Itoa(input)) > 0 {
+			switch input {
 			case 1:
 				if MenuSatuan() == 9 {
 					loop++
@@ -50,37 +44,43 @@ func main() {
 	}
 }
 
-func MenuUtama() string {
-	scanner := bufio.NewScanner(os.Stdin)
-	fmt.Println(strings.Repeat("=", 14), "Laundry Enigma", strings.Repeat("=", 14))
-	fmt.Println("1. Master Satuan")
-	fmt.Println("2. Master Service")
-	fmt.Println("3. Kasir Laundry")
-	fmt.Println("0. Exit")
-	fmt.Println(strings.Repeat("-", 50))
-	fmt.Print("Masukan No Menu : ")
-	scanner.Scan()
-	input := scanner.Text()
-	return input
+func MenuUtama() int {
+	x := 1
+	var xinput int
+	for i := 0; i < x; i++ {
+		scanner := bufio.NewScanner(os.Stdin)
+		fmt.Println(strings.Repeat("=", 14), "Laundry Enigma", strings.Repeat("=", 14))
+		fmt.Println("1. Master Satuan")
+		fmt.Println("2. Master Service")
+		fmt.Println("3. Kasir Laundry")
+		fmt.Println("0. Exit")
+		fmt.Println(strings.Repeat("-", 50))
+		fmt.Print("Masukan No Menu : ")
+		scanner.Scan()
+		input := scanner.Text()
+		if len(input) > 0 {
+			in, err := strconv.Atoi(input)
+			if err != nil {
+				fmt.Println(strings.Repeat("-", 30))
+				fmt.Println("Input Harus Angka!")
+				x++
+			} else {
+				xinput = in
+			}
+		} else {
+			x++
+		}
+	}
+	return xinput
 }
 
 func MenuSatuan() int {
 	var int_input int
-	for {
+	x := 1
+	for i := 0; i < x; i++ {
 		input := view.MenuSatuan()
-		if len(input) > 0 {
-			in, err := strconv.Atoi(input)
-			if err != nil {
-				fmt.Println("Input Harus Angka !")
-			} else {
-				int_input = in
-			}
-
-			if int_input == 9 {
-				return int_input
-			}
-
-			switch in {
+		if len(strconv.Itoa(input)) > 0 {
+			switch input {
 			case 1:
 				xsatuan := mastersatuan.ShowAllSatuan()
 				for _, satuan := range xsatuan {
@@ -93,44 +93,44 @@ func MenuSatuan() int {
 					fmt.Println("Updated By :", satuan.UpdatedBy)
 					fmt.Println(strings.Repeat("=", 30))
 				}
+				x++
 			case 2:
 				if !mastersatuan.InsertSatuan() {
 					fmt.Println("Error Insert Satuan")
 				}
+				x++
 			case 3:
 				if !mastersatuan.UpdateSatuan() {
 					fmt.Println("Error Update Satuan")
 				}
+				x++
 			case 4:
 				if !mastersatuan.DeleteSatuan() {
 					fmt.Println("Gagal Delete Satuan")
 				}
+				x++
+			case 9:
+				int_input = input
 			case 0:
 				os.Exit(0)
 			default:
 				fmt.Println("Input Invalid")
+				x++
 			}
+		} else {
+			x++
 		}
 	}
+	return int_input
 }
 
 func MenuService() int {
 	var int_input int
-	for {
+	x := 1
+	for i := 0; i < x; i++ {
 		input := view.MenuService()
-		if len(input) > 0 {
-			in, err := strconv.Atoi(input)
-			if err != nil {
-				fmt.Println("Input Harus Angka !")
-			} else {
-				int_input = in
-			}
-
-			if int_input == 9 {
-				return int_input
-			}
-
-			switch in {
+		if len(strconv.Itoa(input)) > 0 {
+			switch input {
 			case 1:
 				xservice := masterservice.ShowAllService()
 				for _, serv := range xservice {
@@ -145,43 +145,42 @@ func MenuService() int {
 					fmt.Println("Updated By :", serv.UpdatedBy)
 					fmt.Println(strings.Repeat("=", 30))
 				}
+				x++
 			case 2:
 				if !masterservice.InsertService() {
 					fmt.Println("Error Insert Service")
 				}
+				x++
 			case 3:
 				if !masterservice.UpdateService() {
 					fmt.Println("Error Update Service")
 				}
+				x++
 			case 4:
 				if !masterservice.DeleteService() {
 					fmt.Println("Gagal Delete Service")
 				}
+				x++
+			case 9:
+				int_input = input
 			case 0:
 				os.Exit(0)
 			default:
 				fmt.Println("Input Invalid")
+				x++
 			}
 		}
 	}
+	return int_input
 }
 
 func MenuKasir() int {
-	var int_input int
-	for {
+	x := 1
+	var xinput int
+	for i := 0; i < x; i++ {
 		input := view.MenuKasir()
-		if len(input) > 0 {
-			in, err := strconv.Atoi(input)
-			if err != nil {
-				fmt.Println("Input Harus Angka !")
-			} else {
-				int_input = in
-			}
-
-			if int_input == 9 {
-				return int_input
-			}
-			switch in {
+		if len(strconv.Itoa(input)) > 0 {
+			switch input {
 			case 1:
 				xkasir := kasirlaundry.ShowAllTransaksi()
 				for _, trs := range xkasir {
@@ -195,15 +194,21 @@ func MenuKasir() int {
 					fmt.Println("In By :", trs.Inby)
 					fmt.Println(strings.Repeat("=", 30))
 				}
+				x++
 			case 2:
 				if !kasirlaundry.InsertTansaksi() {
 					fmt.Println("Data Tidak Tersimpan")
 				}
+				x++
+			case 9:
+				xinput = input
 			case 0:
 				os.Exit(0)
 			default:
 				fmt.Println("Invalid Input")
+				x++
 			}
 		}
 	}
+	return xinput
 }
