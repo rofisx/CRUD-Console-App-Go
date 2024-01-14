@@ -1,5 +1,4 @@
-# challenge-godb-enigmacamp
-# simple aplikasi console CRUD Laundry
+# Simple Console App CRUD Golang dan DB Postgre
 # Tutorial Running Challenge GoDB
 1. Running SQL Query pada file DML.sql
 2. Aplikasi ini terdiri dari Menu Master Satuan, Master Service dan Transaksi
