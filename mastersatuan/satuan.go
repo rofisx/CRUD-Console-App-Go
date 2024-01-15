@@ -36,6 +36,11 @@ func ShowAllSatuan() []Satuan {
 	defer rows.Close()
 
 	xsatuan := scanSatuan(rows)
+	if len(xsatuan) <= 0 {
+		fmt.Println(strings.Repeat("-", 50))
+		fmt.Println("Satuan Kosong, Silahkan Input Satuan")
+		fmt.Println(strings.Repeat("-", 50))
+	}
 	return xsatuan
 }
 
@@ -91,6 +96,7 @@ func UpdateSatuan() bool {
 				res = true
 			}
 		} else {
+			fmt.Println(strings.Repeat("-", 50))
 			fmt.Println("Satuan Tidak Ada")
 			res = false
 
@@ -119,6 +125,7 @@ func DeleteSatuan() bool {
 		fmt.Println(strings.Repeat("-", 30))
 		fmt.Println("Satuan Terhapus")
 	} else {
+		fmt.Println(strings.Repeat("-", 30))
 		fmt.Println("Satuan Tidak Ada")
 		res = false
 	}
@@ -252,8 +259,10 @@ func delete(satuanid string, tx *sql.Tx) {
 func validate(err error, message string, tx *sql.Tx) {
 	if err != nil {
 		tx.Rollback()
+		fmt.Println(strings.Repeat("-", 50))
 		fmt.Println(err, "Transaction Rollback")
 	} else {
+		fmt.Println(strings.Repeat("-", 50))
 		fmt.Println("Successfully " + message + " data !")
 	}
 

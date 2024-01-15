@@ -46,6 +46,11 @@ func ShowAllTransaksi() []TrsHeaderLaundry {
 	defer rows.Close()
 
 	xtransaksi := scanTransaksi(rows)
+	if len(xtransaksi) <= 0 {
+		fmt.Println(strings.Repeat("-", 50))
+		fmt.Println("Transaksi Kosong, Silahkan Input Transaksi")
+		fmt.Println(strings.Repeat("-", 50))
+	}
 	return xtransaksi
 }
 
@@ -184,6 +189,7 @@ func inputCustomer() string {
 		if len(scanner.Text()) > 0 {
 			customer = scanner.Text()
 		} else {
+			fmt.Println(strings.Repeat("-", 30))
 			fmt.Println("Nama Customer Kosong!, Silahkan Coba Lagi")
 			loop++
 		}
@@ -203,11 +209,15 @@ func inputContact() int {
 		if len(str_con) > 0 {
 			serv, err := strconv.Atoi(str_con)
 			if err != nil {
+				fmt.Println(strings.Repeat("-", 30))
 				fmt.Println("Contact Harus Angka!, Silahkan Coba Lagi")
+				fmt.Println(strings.Repeat("-", 30))
 				loop++
 			} else {
 				if len(str_con) <= 10 {
+					fmt.Println(strings.Repeat("-", 30))
 					fmt.Println("Minimal 11 Angka!, Silahkan Coba Lagi")
+					fmt.Println(strings.Repeat("-", 30))
 					loop++
 				} else {
 					contact = serv
@@ -231,6 +241,7 @@ func inputUserby() string {
 		if len(scanner.Text()) > 0 {
 			userby = scanner.Text()
 		} else {
+			fmt.Println(strings.Repeat("-", 30))
 			fmt.Println("Input Nama User Kosong!, Silahkan Coba Lagi")
 			loop++
 		}
@@ -277,17 +288,22 @@ func inputServiceId() int {
 		if len(str_service) > 0 {
 			serv, err := strconv.Atoi(str_service)
 			if err != nil {
+				fmt.Println(strings.Repeat("-", 30))
 				fmt.Println("Input Id Service Harus Angka!, Silahkan Coba Lagi")
+				fmt.Println(strings.Repeat("-", 30))
 				loop++
 			} else {
 				if !masterservice.CheckServiceById(serv) {
+					fmt.Println(strings.Repeat("-", 30))
 					fmt.Println("Service Id Tidak Ada!, Silahkan Coba Lagi")
+					fmt.Println(strings.Repeat("-", 30))
 					loop++
 				} else {
 					serviceid = serv
 				}
 			}
 		} else {
+			fmt.Println(strings.Repeat("-", 30))
 			fmt.Println("Input Id Service Kosong!, Silahkan Coba Lagi")
 			loop++
 		}
@@ -307,10 +323,12 @@ func inputQty() int {
 		if len(str_qty) > 0 {
 			qtyint, err := strconv.Atoi(str_qty)
 			if err != nil {
+				fmt.Println(strings.Repeat("-", 30))
 				fmt.Println("Input Qty Service Harus Angka Minimal 1!, Silahkan Coba Lagi")
 				loop++
 			} else {
 				if qtyint <= 0 {
+					fmt.Println(strings.Repeat("-", 30))
 					fmt.Println("Qty Service Minimal 1!, Silahkan Coba Lagi")
 					loop++
 				} else {
@@ -318,6 +336,7 @@ func inputQty() int {
 				}
 			}
 		} else {
+			fmt.Println(strings.Repeat("-", 30))
 			fmt.Println("Input Qty Service Kosong!, Silahkan Coba Lagi")
 			loop++
 		}
@@ -338,7 +357,9 @@ func answerDetail() string {
 		} else if answer == "n" {
 			result = answer
 		} else {
+			fmt.Println(strings.Repeat("-", 30))
 			fmt.Println("Harap Masukan Sesuai Petunjuk")
+			fmt.Println(strings.Repeat("-", 30))
 			x++
 		}
 	}
@@ -361,8 +382,10 @@ func insertDetail(detailTrs TrsDetailLundry, tx *sql.Tx) {
 func validate(err error, message string, tx *sql.Tx) {
 	if err != nil {
 		tx.Rollback()
+		fmt.Println(strings.Repeat("-", 30))
 		fmt.Println(err, "Transaction Rollback")
 	} else {
+		fmt.Println(strings.Repeat("-", 30))
 		fmt.Println("Successfully " + message + " data !")
 	}
 

@@ -35,6 +35,8 @@ func MenuSatuan() int {
 				in_satuan = in
 			}
 		} else {
+			fmt.Println(strings.Repeat("-", 50))
+			fmt.Println("Input Kode Menu Satuan Kosong !")
 			x++
 		}
 	}

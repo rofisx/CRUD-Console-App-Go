@@ -33,9 +33,12 @@ func main() {
 					loop++
 				}
 			case 0:
+				fmt.Println(strings.Repeat("=", 30))
+				fmt.Println("--- Anda Keluar Aplikasi ---")
 				os.Exit(0)
 			default:
-				fmt.Println("Invalid Input")
+				fmt.Println(strings.Repeat("-", 50))
+				fmt.Println("Invalid Input !")
 				loop++
 			}
 		} else {
@@ -68,6 +71,8 @@ func MenuUtama() int {
 				xinput = in
 			}
 		} else {
+			fmt.Println(strings.Repeat("-", 50))
+			fmt.Println("Input Kode Menu Kosong !")
 			x++
 		}
 	}
@@ -85,6 +90,8 @@ func MenuSatuan() int {
 				xsatuan := mastersatuan.ShowAllSatuan()
 				for _, satuan := range xsatuan {
 					fmt.Println(strings.Repeat("=", 30))
+					fmt.Println("--- Menampilkan Satuan ---")
+					fmt.Println(strings.Repeat("=", 30))
 					fmt.Println("Satuan Id :", satuan.SatuanId)
 					fmt.Println("Nama Satuan :", satuan.NamaSatuan)
 					fmt.Println("In Date :", satuan.InDate)
@@ -96,24 +103,30 @@ func MenuSatuan() int {
 				x++
 			case 2:
 				if !mastersatuan.InsertSatuan() {
-					fmt.Println("Error Insert Satuan")
+					fmt.Println("Gagal Insert Satuan")
+					fmt.Println(strings.Repeat("-", 50))
 				}
 				x++
 			case 3:
 				if !mastersatuan.UpdateSatuan() {
-					fmt.Println("Error Update Satuan")
+					fmt.Println("Gagal Update Satuan")
+					fmt.Println(strings.Repeat("-", 50))
 				}
 				x++
 			case 4:
 				if !mastersatuan.DeleteSatuan() {
 					fmt.Println("Gagal Delete Satuan")
+					fmt.Println(strings.Repeat("-", 50))
 				}
 				x++
 			case 9:
 				int_input = input
 			case 0:
+				fmt.Println(strings.Repeat("=", 30))
+				fmt.Println("--- Anda Keluar Aplikasi ---")
 				os.Exit(0)
 			default:
+				fmt.Println(strings.Repeat("=", 30))
 				fmt.Println("Input Invalid")
 				x++
 			}
@@ -135,6 +148,8 @@ func MenuService() int {
 				xservice := masterservice.ShowAllService()
 				for _, serv := range xservice {
 					fmt.Println(strings.Repeat("=", 30))
+					fmt.Println("--- Menampilkan Service ---")
+					fmt.Println(strings.Repeat("=", 30))
 					fmt.Println("Service Id :", serv.ServiceId)
 					fmt.Println("Nama Service :", serv.NamaService)
 					fmt.Println("Harga Service :", serv.Harga)
@@ -149,23 +164,29 @@ func MenuService() int {
 			case 2:
 				if !masterservice.InsertService() {
 					fmt.Println("Error Insert Service")
+					fmt.Println(strings.Repeat("-", 50))
 				}
 				x++
 			case 3:
 				if !masterservice.UpdateService() {
 					fmt.Println("Error Update Service")
+					fmt.Println(strings.Repeat("-", 50))
 				}
 				x++
 			case 4:
 				if !masterservice.DeleteService() {
 					fmt.Println("Gagal Delete Service")
+					fmt.Println(strings.Repeat("-", 50))
 				}
 				x++
 			case 9:
 				int_input = input
 			case 0:
+				fmt.Println(strings.Repeat("=", 30))
+				fmt.Println("--- Anda Keluar Aplikasi ---")
 				os.Exit(0)
 			default:
+				fmt.Println(strings.Repeat("-", 30))
 				fmt.Println("Input Invalid")
 				x++
 			}
@@ -184,6 +205,8 @@ func MenuKasir() int {
 			case 1:
 				xkasir := kasirlaundry.ShowAllTransaksi()
 				for _, trs := range xkasir {
+					fmt.Println(strings.Repeat("=", 30))
+					fmt.Println("--- Menampilkan Transaksi ---")
 					fmt.Println(strings.Repeat("=", 30))
 					fmt.Println("Trs Id :", trs.TrsID)
 					fmt.Println("Nama Customer :", trs.NamaCustomer)

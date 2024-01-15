@@ -34,6 +34,8 @@ func MenuKasir() int {
 				in_kasir = in
 			}
 		} else {
+			fmt.Println(strings.Repeat("-", 50))
+			fmt.Println("Input Kode Menu Transaksi Kosong !")
 			x++
 		}
 	}

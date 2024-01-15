@@ -40,6 +40,11 @@ func ShowAllService() []Service {
 	defer rows.Close()
 
 	xservice := scanService(rows)
+	if len(xservice) <= 0 {
+		fmt.Println(strings.Repeat("-", 50))
+		fmt.Println("Service Kosong, Silahkan Input Service")
+		fmt.Println(strings.Repeat("-", 50))
+	}
 	return xservice
 }
 
@@ -105,7 +110,8 @@ func UpdateService() bool {
 				res = true
 			}
 		} else {
-			fmt.Println("Satuan Tidak Ada")
+			fmt.Println(strings.Repeat("-", 30))
+			fmt.Println("Service Tidak Ada")
 			res = false
 
 		}
@@ -133,6 +139,7 @@ func DeleteService() bool {
 		fmt.Println(strings.Repeat("-", 30))
 		fmt.Println("Service Terhapus")
 	} else {
+		fmt.Println(strings.Repeat("-", 30))
 		fmt.Println("Service Tidak Ada")
 		res = false
 	}
@@ -208,7 +215,7 @@ func inputServiceIdNotExist() int {
 				serviceid = serv
 			}
 		} else {
-			fmt.Println("Input Id Satuan Kosong!, Silahkan Coba Lagi")
+			fmt.Println("Input Id Service Kosong!, Silahkan Coba Lagi")
 			loop++
 		}
 	}
@@ -332,8 +339,10 @@ func delete(serviceid int, tx *sql.Tx) {
 func validate(err error, message string, tx *sql.Tx) {
 	if err != nil {
 		tx.Rollback()
+		fmt.Println(strings.Repeat("-", 50))
 		fmt.Println(err, "Transaction Rollback")
 	} else {
+		fmt.Println(strings.Repeat("-", 50))
 		fmt.Println("Successfully " + message + " data !")
 	}
 

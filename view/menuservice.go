@@ -35,6 +35,8 @@ func MenuService() int {
 				in_service = in
 			}
 		} else {
+			fmt.Println(strings.Repeat("-", 50))
+			fmt.Println("Input Kode Menu Service Kosong !")
 			x++
 		}
 	}
