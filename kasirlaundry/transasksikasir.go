@@ -161,8 +161,22 @@ func checkTrsExist(trs string) bool {
 func getTrs() string {
 	var result string
 	date := getdate.GetYMD()
-	var trs string = "TRX" + date + "000001"
-	if checkTrsExist(trs) {
+	// var trs string = "TRX" + date + "000001"
+	var trs string
+	db, err := sql.Open("postgres", connection.Psqlinfo)
+	if err != nil {
+		panic(err)
+	}
+	err = db.Ping()
+	if err != nil {
+		panic(err)
+	}
+	defer db.Close()
+	query := "SELECT trsid FROM trx_laundry ORDER BY trsid DESC LIMIT 1"
+	err = db.QueryRow(query).Scan(&trs)
+	if err != nil {
+		result = "TRX" + date + "000001"
+	} else {
 		xtrs := trs[11:]
 		trsint, _ := strconv.Atoi(xtrs)
 		lenindex := len(xtrs) - len(strconv.Itoa(trsint))
@@ -173,8 +187,6 @@ func getTrs() string {
 		trsint++
 		result = trs[0 : len(trs)-len(xtrs)]
 		result += zero + strconv.Itoa(trsint)
-	} else {
-		result = trs
 	}
 	return result
 }
